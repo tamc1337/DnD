@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+:root{
+    --fancyFont: 'Luminari', fantasy, monospace;
+    --bg:  #E01C29;
+    --card-bg:#25100B;
+    --text:#F3CB70;
+    --fav-box-bg:#451C19 ;
+    --fav-text: white ; 
+    --opac: 1;
+}
+body{
+    font-family: var(--fancyFont);
+    font-weight: 200;
+    background-color: var(--bg);
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    background-color: var(--card-bg);
+}
+header h1{
+    font-size: 2.5rem;
+    font-family: var(--fancyFont);
+    font-weight: 200;
+    color: var(--text);
+}
+header h2{
+    font-family: var(--fancyFont);
+    font-weight: 200;
+    color: var(--text);
+}
+main{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+/* FaveBox */
+#fav{
+    position: fixed;
+    right: 0;
+    top: 7%;
+    z-index: 4;
+    transition: 0.4s;
+    transform: translateX(100%);
+    background-color: var(--fav-box-bg);
+    padding: 15px 10px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    color: var(--fav-text);
+}
+#fav span{
+    color: var(--fav-text);
+    font-size: 2rem;
+}
+#fav.open{
+    transform: translateX(0);
+
+}
+#fav .btn-group{
+    position: relative;
+    transform: translate(-100%,-459%);
+    left: -1px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2rem;
+    color: var(--fav-text);
+    width: 8rem;
+    border: 0;
+    padding: 2rem 1rem;
+    background: var(--fav-box-bg);
+    height: 35px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+#fav #fav-box .monster-pic{
+    display: none;
+}
+#fav #fav-box .monster-pic.fav{
+    display: block;
+}
+
+#monsterid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem;
+    gap: 1.5rem;
+}
+#monsterid .monster-pic{
+    width: 22.5rem;
+    max-height: fit-content;
+    margin-top: 2.5rem;
+    border: 1px solid #333;
+    box-shadow: 4px 12px 10px var(--text);
+    border-radius: 10px;
+    padding: 1rem;
+    transition: all 0.2s ease-in-out;
+    color: var(--text);
+    background-color: var(--card-bg);
+}
+#monsterid .monster-pic:hover{
+    transform:scale(1.15);
+}
+
+
+#monsterid .monster-pic img{
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#monsterid #couatl img,
+#monsterid #hezrou img,
+#monsterid #cloaker img,
+#monsterid #chuul img,
+#monsterid #darkmantle img{
+    width: 10rem;
+}
+.monster-pic .monster-title{
+    font-size: 1.7rem;
+    font-weight: 200;
+}
+.hit-pts,
+.type{
+    font-size: 1.4rem;
+    font-weight: 200;
+}
+.type{
+    text-transform: capitalize;
+}
+.stats-box .stats li{
+    font-size: 1rem;
+    list-style: none;
+}
+footer {
+    position: relative;
+    bottom: -10rem;
+    left: 0;
+    right:0;
+}
+footer .footer{
+    position: relative;
+    bottom: -10rem;
+    left: 0;
+    right: 0;
+}
