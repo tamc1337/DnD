@@ -20,17 +20,18 @@ body{
 }
 header{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     margin-bottom: 3rem;
     background-color: var(--card-bg);
 }
 header h1{
-    font-size: 2.5rem;
+    font-size: 3.3rem;
     font-family: var(--fancyFont);
     font-weight: 200;
     color: var(--text);
+    margin-left: 4rem;
 }
 header h2{
     font-family: var(--fancyFont);
@@ -65,9 +66,9 @@ main{
     transform: translateX(0);
 
 }
-#fav .btn-group{
+/* #fav  */
+.btn-group{
     position: relative;
-    transform: translate(-100%,-459%);
     left: -1px;
     align-items: center;
     justify-content: center;
@@ -83,7 +84,14 @@ main{
     border-top-left-radius: 10px;
 
 }
+#fav-box{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 75vh;
+}
 #fav #fav-box .monster-pic{
+    max-width: fit-content;
     display: none;
 }
 #fav #fav-box .monster-pic.fav{

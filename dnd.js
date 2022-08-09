@@ -188,18 +188,18 @@ async function allPagesPics() {
     const p28 = fetch(`https://api.open5e.com/monsters/?page=28`);
     const p29 = fetch(`https://api.open5e.com/monsters/?page=29`);
     const p30 = fetch(`https://api.open5e.com/monsters/?page=30`);*/
-    const total = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p14,p22]);
-        //  p8, p9, p10, p11,p12, p13, p15, p16, p17, p18, p19, p20, p21, , p23, p24, p25, p26, p27, p28, p29, p30
+    const total = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p14, p22]);
+    //  p8, p9, p10, p11,p12, p13, p15, p16, p17, p18, p19, p20, p21, , p23, p24, p25, p26, p27, p28, p29, p30
     const dndPromises = total.map(r => r.json());
     const [page1, page2, page3, page4, page5, page6, page7, page14, page22] = await Promise.all(dndPromises);
-        //  page8, page9, page10, page11, page12, page13,  page15, page16, page17, page18, page19, page20, page21,  page23, page24, page25, page26, page27, page28, page29, page30]
+    //  page8, page9, page10, page11, page12, page13,  page15, page16, page17, page18, page19, page20, page21,  page23, page24, page25, page26, page27, page28, page29, page30]
 
     console.log(page1, page2, page3, page4, page5, page6, page7, page14, page22);
 };
-        // page8, page9, page10, page11, page12, page13,  page15, page16, page17, page18, page19, page20, page21,  page23, page24, page25, page26, page27, page28, page29, page30
+// page8, page9, page10, page11, page12, page13,  page15, page16, page17, page18, page19, page20, page21,  page23, page24, page25, page26, page27, page28, page29, page30
 allPagesPics();
 
-const allPages = ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7','page14',  'page22'];
+const allPages = ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page14', 'page22'];
 // 'page8', 'page9', 'page10', 'page11', 'page12', 'page13', 
 // 'page15', 'page16', 'page17', 'page18', 'page19', 'page20', 'page21',
 // 'page23', 'page24', 'page25', 'page26', 'page27', 'page28', 'page29', 'page30'
@@ -207,15 +207,16 @@ const allPages = ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7',
 
 const getData = async (pages) => {
     const promises = pages.map(page => {
-            let pgNum = page.slice(4);
-            console.log(pgNum);
-            fetch(`https://api.open5e.com/monsters/?page=${pgNum}`)
-                .then(r => r.json())
-                .then(res => {
-                    const monsters = res.results.map(mon => {
-                        if (mon.img_main != null) {
-                            console.log(mon.name);
-                            return `<div class="monster-pic" id='${mon.slug}'>
+        let pgNum = page.slice(4);
+        console.log(pgNum);
+        fetch(`https://api.open5e.com/monsters/?page=${pgNum}`)
+            .then(r => r.json())
+            .then(res => {
+                const monsters = res.results.map(mon => {
+                    if (mon.img_main != null) {
+                        console.log(mon.name);
+                        //
+                        return `<div class="monster-pic" id='${mon.slug}'>
                                         <h2 class="monster-title"> ${mon.name} </h2>
                                         <img src="${mon.img_main}" alt="${mon.name}"></img>
                                         <h3 class="hit-pts">Hit Points: ${mon.hit_points}</h3>
@@ -231,18 +232,45 @@ const getData = async (pages) => {
                                             </ul>
                                         </div>
                                     </div> <br>`;
+                    }
+                }).join('');
+                const favMons = res.results.map(mon => {
+                    if (mon.img_main != null) {
+                        return `<div class="monster-pic">
+                        <h2 class="monster-title"> ${mon.name} </h2>
+                        <img src="${mon.img_main}" alt="${mon.name}"></img>
+                        </div>`}
+                }).join('');
+                document.querySelector('#monsterid').insertAdjacentHTML('afterbegin', monsters);
+                document.querySelector('#fav-box').insertAdjacentHTML('afterbegin', favMons)
+            })
+            .then(ful => {
+                const monTitle = '.monster-title';
+                const monQuerAll = document.querySelectorAll(monTitle);
+                const favBox = document.getElementById('fav-box');
+                const favBoxMons = document.que
+                const favMons = '#fav-box .monster-pic'
+                monQuerAll.forEach(mon => {
+                    mon.addEventListener('click', function () {
+                        const x = this.parentElement;
+                        let tempTitle = document.querySelector(`${this.innerHTML}`)
+                        if(!favMons.includes(tempTitle) && !favMons.classList.includes(fav)){
+                            favMons.classList.add(fav);
+                        } else {
+                            this.classList.remove(fav);
                         }
-                    }).join('');
-                    document.querySelector('#monsterid').insertAdjacentHTML('afterbegin', monsters);
-                    document.querySelector('#fav-box').insertAdjacentHTML('afterbegin', monsters)
+                    })
                 })
-                .catch(err => console.error(err));
-        });
+            })
+            .catch(err => console.error(err));
+    });
     const accounts = await Promise.all(promises);
     console.log(accounts);
 }
 getData(allPages)
 
+
+
 // For favorites bar: add event listener to wait for click on  title/ picture of monster, then
-//add favorite class to it and remove monster pic class, 
+//add favorite class to it and remove monster pic class,
 // use id of monster name/slug to hook into it and have fav box build in top /on side

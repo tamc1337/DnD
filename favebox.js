@@ -1,24 +1,22 @@
 const btnGrp = '.btn-group';
 const fav = '.fav'
-const open = 'open';
+const opener = 'open';
 const openFavs = document.querySelector(btnGrp);
-const favMons = document
-const monPic = '.monster-pic';
-const monQuerAll = document.querySelectorAll(monPic);
+const favsBar = document.getElementById('fav');
+
+const favBox = document.getElementById('fav-box');
+const monTitle = 'monster-title';
+const favMons = '#fav-box .monster-pic'
+const monQuerAll = document.querySelectorAll(monTitle);
 
 openFavs.addEventListener('click', function() {
-    const tab = this.parentElement.parentElement;
-    if(!tab.className.includes(open)){
-        tab.classList.add(open);
+    if(!favsBar.className.includes(opener)){
+        favsBar.classList.add(opener);
     } else {
-        tab.classList.remove(open);
+        favsBar.classList.remove(opener);
     }
 })
 
-monQuerAll.addEventListener('click', function(){
-    if(!this.className.includes(fav)){
-        this.classList.add(fav);
-    } else {
-        this.classList.remove(fav);
-    }
-})
+
+
+  
